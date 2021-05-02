@@ -31,6 +31,15 @@ https://kenney.nl/assets/watercraft-pack
 The drone (Kenny) was downloaded from
 https://kenney.nl/assets/space-kit
 
+The background (ansimuz) was downloaded from
+https://opengameart.org/content/industrial-parallax-background
+
+The chiptunes (Patrick De Arteaga) were downloaded from
+https://patrickdearteaga.com/chiptune-8-bit-retro/
+
+The gunshot sound Xenonn was downloaded from
+https://freesound.org/people/Xenonn/sounds/128295/
+
 ## Features I included
 1. A third-person animated character that moves with keyboard and mouse
 2. Camera that follows the player
