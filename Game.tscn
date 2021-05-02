@@ -1,0 +1,457 @@
+[gd_scene load_steps=37 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/ground_riverSide.glb" type="PackedScene" id=3]
+[ext_resource path="res://Assets/ground_grass.glb" type="PackedScene" id=4]
+[ext_resource path="res://Assets/watercraftPack_012.gltf" type="PackedScene" id=5]
+[ext_resource path="res://Player/Reticlule.gd" type="Script" id=6]
+[ext_resource path="res://NPC/NPC.gd" type="Script" id=7]
+[ext_resource path="res://NPC/NPC.tscn" type="PackedScene" id=8]
+[ext_resource path="res://UI/Dialogue.gd" type="Script" id=9]
+[ext_resource path="res://UI/UI.gd" type="Script" id=10]
+[ext_resource path="res://Assets/wallWoodDetailHorizontal.glb" type="PackedScene" id=11]
+[ext_resource path="res://Assets/path_tilesLong.glb" type="PackedScene" id=12]
+[ext_resource path="res://Assets/house_type20.glb" type="PackedScene" id=13]
+[ext_resource path="res://Assets/road_straight.glb" type="PackedScene" id=14]
+[ext_resource path="res://Assets/driveway_long.glb" type="PackedScene" id=15]
+[ext_resource path="res://Assets/house_type19.glb" type="PackedScene" id=16]
+[ext_resource path="res://Assets/light_square.glb" type="PackedScene" id=17]
+[ext_resource path="res://Assets/tree_oak_dark.glb" type="PackedScene" id=18]
+[ext_resource path="res://Target/Target.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Drone/Drone.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Assets/Kenney Future.ttf" type="DynamicFontData" id=21]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 100, 0.5, 100 )
+
+[sub_resource type="ConvexPolygonShape" id=2]
+points = PoolVector3Array( -50, 0.25, 50, 50, 0.25, -50, 50, 0.25, 50, -50, 0.25, -50, -50, -0.25, 50, 50, -0.25, -50, 50, -0.25, 50, -50, -0.25, -50, 50, 0.25, 50, -50, 0.25, -50, 50, 0.25, -50, -50, 0.25, 50, 50, -0.25, 50, -50, -0.25, -50, 50, -0.25, -50, -50, -0.25, 50, 50, 0.25, 50, -50, -0.25, 50, -50, 0.25, 50, 50, -0.25, 50, 50, 0.25, -50, -50, -0.25, -50, -50, 0.25, -50, 50, -0.25, -50 )
+
+[sub_resource type="ConvexPolygonShape" id=7]
+points = PoolVector3Array( -20, 2.5, 0.5, 20, 2.5, -0.5, 20, 2.5, 0.5, -20, 2.5, -0.5, -20, -2.5, 0.5, 20, -2.5, -0.5, 20, -2.5, 0.5, -20, -2.5, -0.5, 20, 2.5, 0.5, -20, 2.5, -0.5, 20, 2.5, -0.5, -20, 2.5, 0.5, 20, -2.5, 0.5, -20, -2.5, -0.5, 20, -2.5, -0.5, -20, -2.5, 0.5, 20, 2.5, 0.5, -20, -2.5, 0.5, -20, 2.5, 0.5, 20, -2.5, 0.5, 20, 2.5, -0.5, -20, -2.5, -0.5, -20, 2.5, -0.5, 20, -2.5, -0.5 )
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 5.06695, 0.001, 5.17358 )
+
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 8.20516, 18.0168, 8.11021 )
+
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 0.270333, 9.26873, 0.364989 )
+
+[sub_resource type="BoxShape" id=11]
+extents = Vector3( 6.32364, 2.05365, 3.65687 )
+
+[sub_resource type="BoxShape" id=12]
+extents = Vector3( 0.497061, 13.3012, 0.546137 )
+
+[sub_resource type="BoxShape" id=13]
+extents = Vector3( 1.52997, 13.7062, 0.959839 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 1, 0, 0, 1 )
+emission_enabled = true
+emission = Color( 1, 0, 0, 1 )
+emission_energy = 4.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SphereMesh" id=4]
+material = SubResource( 3 )
+radius = 0.5
+height = 1.0
+
+[sub_resource type="SphereShape" id=5]
+radius = 6.12278
+
+[sub_resource type="DynamicFont" id=14]
+font_data = ExtResource( 21 )
+
+[sub_resource type="DynamicFont" id=15]
+font_data = ExtResource( 21 )
+
+[sub_resource type="DynamicFont" id=16]
+font_data = ExtResource( 21 )
+
+[node name="Game" type="Spatial"]
+
+[node name="Ground" type="StaticBody" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Ground"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Ground"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 2 )
+
+[node name="Environment" type="Spatial" parent="."]
+
+[node name="ground_grass" parent="Environment" instance=ExtResource( 4 )]
+transform = Transform( 100, 0, 0, 0, 1, 0, 0, 0, 80, 0, 1, 9.63468 )
+
+[node name="ground_riverSide" parent="Environment" instance=ExtResource( 3 )]
+transform = Transform( -100, 0, -7.78829e-06, 0, 1, 0, 3.89414e-05, 0, -20, 0, 1, -40.1863 )
+
+[node name="watercraftPack_012" parent="Environment" instance=ExtResource( 5 )]
+transform = Transform( 0.167991, 0, -3.99647, 0, 4, 0, 3.99647, 0, 0.167991, 39.1487, -0.47046, -37.581 )
+
+[node name="wallWoodDetailHorizontal" parent="Environment" instance=ExtResource( 11 )]
+transform = Transform( -1.62921e-06, 0, 10, 0, 10, 0, -10, 0, -1.62921e-06, 45, 1, -30 )
+
+[node name="wallWoodDetailHorizontal2" parent="Environment" instance=ExtResource( 11 )]
+transform = Transform( -1.62921e-06, 0, 10, 0, 10, 0, -10, 0, -1.62921e-06, 35, 1, -30 )
+
+[node name="wallWoodDetailHorizontal3" parent="Environment" instance=ExtResource( 11 )]
+transform = Transform( -1.62921e-06, 0, 10, 0, 10, 0, -10, 0, -1.62921e-06, 25, 1, -30 )
+
+[node name="wallWoodDetailHorizontal4" parent="Environment" instance=ExtResource( 11 )]
+transform = Transform( -1.62921e-06, 0, 10, 0, 10, 0, -10, 0, -1.62921e-06, 15, 1, -30 )
+
+[node name="wallWoodDetailHorizontal7" parent="Environment" instance=ExtResource( 11 )]
+transform = Transform( -1.62921e-06, 0, 10, 0, 10, 0, -10, 0, -1.62921e-06, -15, 1, -30 )
+
+[node name="wallWoodDetailHorizontal8" parent="Environment" instance=ExtResource( 11 )]
+transform = Transform( -1.62921e-06, 0, 10, 0, 10, 0, -10, 0, -1.62921e-06, -25, 1, -30 )
+
+[node name="wallWoodDetailHorizontal9" parent="Environment" instance=ExtResource( 11 )]
+transform = Transform( -1.62921e-06, 0, 10, 0, 10, 0, -10, 0, -1.62921e-06, -35, 1, -30 )
+
+[node name="wallWoodDetailHorizontal10" parent="Environment" instance=ExtResource( 11 )]
+transform = Transform( -1.62921e-06, 0, 10, 0, 10, 0, -10, 0, -1.62921e-06, -45, 1, -30 )
+
+[node name="wallWoodDetailHorizontal11" parent="Environment" instance=ExtResource( 11 )]
+transform = Transform( 1.16486e-06, 7.14985, 6.99139, 10, -1.62921e-06, 0, 1.13904e-06, 6.99139, -7.14985, 2.723, 5.79106, -18.294 )
+
+[node name="wallWoodDetailHorizontal12" parent="Environment" instance=ExtResource( 11 )]
+transform = Transform( -1.54263e-06, -9.46857, 3.21654, 10, -1.62921e-06, 0, 5.24042e-07, 3.21654, 9.46857, -4.65752, 5.79106, -18.294 )
+
+[node name="path_tilesLong" parent="Environment" instance=ExtResource( 12 )]
+transform = Transform( -3.25841e-06, 0, 80, 0, 20, 0, -20, 0, -1.30337e-05, 34, 1, -22 )
+
+[node name="path_tilesLong2" parent="Environment" instance=ExtResource( 12 )]
+transform = Transform( -3.25841e-06, 0, 80, 0, 20, 0, -20, 0, -1.30337e-05, 2, 1, -22 )
+
+[node name="path_tilesLong3" parent="Environment" instance=ExtResource( 12 )]
+transform = Transform( -3.25841e-06, 0, 80, 0, 20, 0, -20, 0, -1.30337e-05, -30, 1, -22 )
+
+[node name="path_tilesLong4" parent="Environment" instance=ExtResource( 12 )]
+transform = Transform( -3.25841e-06, 0, 10, 0, 20, 0, -20, 0, -1.62921e-06, -48.0077, 1, -22 )
+
+[node name="path_tilesLong5" parent="Environment" instance=ExtResource( 12 )]
+transform = Transform( -3.25841e-06, 0, 80, 0, 20, 0, -20, 0, -1.30337e-05, 34, 1, -9.353 )
+
+[node name="path_tilesLong6" parent="Environment" instance=ExtResource( 12 )]
+transform = Transform( -3.25841e-06, 0, 80, 0, 20, 0, -20, 0, -1.30337e-05, 2, 1, -9.353 )
+
+[node name="path_tilesLong7" parent="Environment" instance=ExtResource( 12 )]
+transform = Transform( -3.25841e-06, 0, 80, 0, 20, 0, -20, 0, -1.30337e-05, -30, 1, -9.353 )
+
+[node name="path_tilesLong8" parent="Environment" instance=ExtResource( 12 )]
+transform = Transform( -3.25841e-06, 0, 10, 0, 20, 0, -20, 0, -1.62921e-06, -48.0077, 1, -9.353 )
+
+[node name="path_tilesLong9" parent="Environment" instance=ExtResource( 12 )]
+transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 80, 1.14421, 1, 7.59363 )
+
+[node name="path_tilesLong10" parent="Environment" instance=ExtResource( 12 )]
+transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 70, 1.14421, 1, 36.1051 )
+
+[node name="path_tilesLong11" parent="Environment" instance=ExtResource( 12 )]
+transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 80, 13.6628, 1, 7.59363 )
+
+[node name="path_tilesLong12" parent="Environment" instance=ExtResource( 12 )]
+transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 70, 13.6628, 1, 36.1051 )
+
+[node name="road_straight" parent="Environment" instance=ExtResource( 14 )]
+transform = Transform( 100, 0, 0, 0, 10, 0, 0, 0, 10, 0, 1, -23.1902 )
+
+[node name="road_straight2" parent="Environment" instance=ExtResource( 14 )]
+transform = Transform( -1.01011e-05, 0, 10, 0, 10, 0, -62, 0, -1.62921e-06, 0, 1.15, 19.0192 )
+
+[node name="driveway_long" parent="Environment" instance=ExtResource( 15 )]
+
+[node name="house_type19" parent="Environment" instance=ExtResource( 16 )]
+transform = Transform( -3.25841e-06, 0, 20, 0, 20, 0, -20, 0, -3.25841e-06, 31, 1, 33.4678 )
+
+[node name="house_type21" parent="Environment" instance=ExtResource( 16 )]
+transform = Transform( -3.25841e-06, 0, 20, 0, 20, 0, -20, 0, -3.25841e-06, 30.9907, 1.0295, 6.26841 )
+
+[node name="house_type20" parent="Environment" instance=ExtResource( 13 )]
+transform = Transform( -3.25841e-06, 0, 20, 0, 20, 0, -20, 0, -3.25841e-06, -20.1779, 1, 32.9138 )
+
+[node name="house_type22" parent="Environment" instance=ExtResource( 13 )]
+transform = Transform( -3.25841e-06, 0, 20, 0, 20, 0, -20, 0, -3.25841e-06, -20.178, 1, 5.07759 )
+
+[node name="driveway_long2" parent="Environment" instance=ExtResource( 15 )]
+transform = Transform( -3.25841e-06, 0, 78, 0, 20, 0, -20, 0, -1.27078e-05, -12.634, 1.16, -2.393 )
+
+[node name="driveway_long5" parent="Environment" instance=ExtResource( 15 )]
+transform = Transform( -3.25841e-06, 0, 78, 0, 20, 0, -20, 0, -1.27078e-05, -12.634, 1.16, 25.453 )
+
+[node name="driveway_long3" parent="Environment" instance=ExtResource( 15 )]
+transform = Transform( -3.25841e-06, 0, 65, 0, 20, 0, -20, 0, -1.05898e-05, 25.769, 1.15, -1.30461 )
+
+[node name="driveway_long4" parent="Environment" instance=ExtResource( 15 )]
+transform = Transform( -3.25841e-06, 0, 65, 0, 20, 0, -20, 0, -1.05898e-05, 25.769, 1.15, 26.161 )
+
+[node name="tree_oak_dark" parent="Environment" instance=ExtResource( 18 )]
+transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 20, -43.1211, 1, 40.1425 )
+
+[node name="tree_oak_dark2" parent="Environment" instance=ExtResource( 18 )]
+transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 20, -43.1211, 1, 2.09239 )
+
+[node name="tree_oak_dark3" parent="Environment" instance=ExtResource( 18 )]
+transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 20, -43.1211, 1, 20.8337 )
+
+[node name="tree_oak_dark4" parent="Environment" instance=ExtResource( 18 )]
+transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 20, 45.08, 1, -1.61444 )
+
+[node name="tree_oak_dark5" parent="Environment" instance=ExtResource( 18 )]
+transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 20, 45.08, 1, 27.2201 )
+
+[node name="light_square" parent="Environment" instance=ExtResource( 17 )]
+transform = Transform( -3.25841e-06, 0, 20, 0, 20, 0, -20, 0, -3.25841e-06, -12.8399, 1.52877, -10.329 )
+
+[node name="light_square2" parent="Environment" instance=ExtResource( 17 )]
+transform = Transform( 2.38498e-07, 0, -20, 0, 20, 0, 20, 0, 2.38498e-07, 28.2201, 1.52877, 41.1472 )
+
+[node name="Collision" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 3.43097, -25.5368 )
+shape = SubResource( 7 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.93, 3.43097, -25.5368 )
+shape = SubResource( 7 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="Collision"]
+transform = Transform( 0.716399, 0, -0.69769, 0, 1, 0, 0.69769, 0, 0.716399, 6.29154, 1.46657, -14.8125 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="Collision"]
+transform = Transform( 0.340806, 0, -0.940134, 0, 1, 0, 0.940134, 0, 0.340806, -9.37034, 1.46657, -16.6279 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape6" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.9418, 0, 10.2294 )
+shape = SubResource( 9 )
+
+[node name="CollisionShape7" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.9418, 0, 37.5312 )
+shape = SubResource( 9 )
+
+[node name="CollisionShape8" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.4127, 0, 9.26236 )
+shape = SubResource( 9 )
+
+[node name="CollisionShape9" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.4127, 0, 37.0277 )
+shape = SubResource( 9 )
+
+[node name="CollisionShape10" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0203, 0, -6.20547 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape11" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0203, 0, -6.23096 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape12" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.5593, 0, -6.23096 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape17" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.579, 0, 21.5875 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape18" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9752, 0, 21.5875 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape13" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5299, 0, -5.00512 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape14" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38.2442, 0, -5.00512 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape15" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38.2442, 0, 22.1569 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape16" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5783, 0, 22.1569 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.8158, 0.119818, -37.5245 )
+shape = SubResource( 11 )
+
+[node name="CollisionShape19" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.22332, 0, -10.3137 )
+shape = SubResource( 12 )
+
+[node name="CollisionShape20" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3928, 0, 41.1703 )
+shape = SubResource( 12 )
+
+[node name="CollisionShape21" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.1728, 0, 2.14767 )
+shape = SubResource( 13 )
+
+[node name="CollisionShape22" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.1728, 0, 20.9101 )
+shape = SubResource( 13 )
+
+[node name="CollisionShape23" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.1728, 0, 40.2104 )
+shape = SubResource( 13 )
+
+[node name="CollisionShape24" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.0266, 0, 27.2722 )
+shape = SubResource( 13 )
+
+[node name="CollisionShape25" type="CollisionShape" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.0266, 0, -1.59792 )
+shape = SubResource( 13 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.217632, 0, -0.976031, 0, 1, 0, 0.976031, 0, 0.217632, 40.3101, 0.999393, -30.3674 )
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 1 )
+
+[node name="Pivot" type="Position3D" parent="Player"]
+
+[node name="Camera" type="Camera" parent="Player/Pivot"]
+transform = Transform( -1, 5.65818e-08, -3.20891e-07, 0, 0.984808, 0.173648, 3.25841e-07, 0.173648, -0.984808, 0, 5, -8 )
+
+[node name="RayCast" type="RayCast" parent="Player/Pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 3 )
+enabled = true
+cast_to = Vector3( 0, 0, 100 )
+script = ExtResource( 6 )
+
+[node name="Reticule" type="Position3D" parent="Player/Pivot/RayCast"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Player/Pivot/RayCast/Reticule"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="NPC" parent="." instance=ExtResource( 8 )]
+transform = Transform( -0.278471, 0, 0.960445, 0, 1, 0, -0.960445, 0, -0.278471, 29.5694, 0.9, -29.4826 )
+script = ExtResource( 7 )
+
+[node name="Area" type="Area" parent="NPC"]
+collision_layer = 2
+collision_mask = 2147483650
+
+[node name="CollisionShape" type="CollisionShape" parent="NPC/Area"]
+shape = SubResource( 5 )
+
+[node name="Drone_container" type="Spatial" parent="."]
+
+[node name="Drone" parent="Drone_container" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 100 )
+
+[node name="Target_container" type="Spatial" parent="."]
+
+[node name="targetB" parent="Target_container" instance=ExtResource( 19 )]
+transform = Transform( 0.456291, 0, 0.889831, 0, 1, 0, -0.889831, 0, 0.456291, -14.3228, 3.54102, -8.02016 )
+
+[node name="targetB7" parent="Target_container" instance=ExtResource( 19 )]
+transform = Transform( 0.456291, 0, 0.889831, 0, 1, 0, -0.889831, 0, 0.456291, -32.6165, 3.54102, 19.9061 )
+
+[node name="targetB2" parent="Target_container" instance=ExtResource( 19 )]
+transform = Transform( -0.699875, 0, 0.714265, 0, 1, 0, -0.714265, 0, -0.699875, 17.0862, 14.7461, -3.37768 )
+
+[node name="targetB3" parent="Target_container" instance=ExtResource( 19 )]
+transform = Transform( 0.0769625, 0, 0.997034, 0, 1, 0, -0.997034, 0, 0.0769625, -3.8162, 3.54102, -22.8621 )
+
+[node name="targetB4" parent="Target_container" instance=ExtResource( 19 )]
+transform = Transform( 0.551806, 0, 0.833973, 0, 1, 0, -0.833973, 0, 0.551806, -8.9249, 3.54102, 8.54131 )
+
+[node name="targetB5" parent="Target_container" instance=ExtResource( 19 )]
+transform = Transform( -0.655993, 0, 0.754767, 0, 1, 0, -0.754767, 0, -0.655993, 11.4639, 3.54102, 31.6755 )
+
+[node name="targetB6" parent="Target_container" instance=ExtResource( 19 )]
+transform = Transform( 0.185238, 0, 0.982694, 0, 1, 0, -0.982694, 0, 0.185238, -21.1892, 3.54102, 24.6681 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource( 10 )
+
+[node name="Damage" type="ColorRect" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="UI"]
+anchor_right = 1.0
+margin_bottom = 30.0
+color = Color( 0, 0, 0, 0.501961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="Label" parent="UI"]
+margin_left = 10.0
+margin_right = 510.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 14 )
+text = "Score:"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Time" type="Label" parent="UI"]
+margin_left = 512.0
+margin_right = 1014.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 15 )
+text = "Timer: 00:00"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="UI"]
+
+[node name="Dialogue" type="Control" parent="UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="UI/Dialogue"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -30.0
+color = Color( 0, 0, 0, 0.501961 )
+
+[node name="Text" type="RichTextLabel" parent="UI/Dialogue"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -20.0
+margin_bottom = 10.0
+custom_fonts/normal_font = SubResource( 16 )
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="body_entered" from="NPC/Area" to="NPC" method="_on_Area_body_entered"]
+[connection signal="body_exited" from="NPC/Area" to="NPC" method="_on_Area_body_exited"]
+[connection signal="timeout" from="UI/Timer" to="UI" method="_on_Timer_timeout"]
