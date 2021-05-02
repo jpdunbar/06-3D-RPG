@@ -13,8 +13,7 @@ var mouse_sensitivity = 0.002
 var target = null
 
 func _ready():
-	pass
-	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(_delta):
 	velocity.y += gravity * _delta
@@ -38,6 +37,9 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("shoot"):
 		$AnimationTree.active = false
 		$AnimationPlayer.play("Shoot")
+		var sound = get_node_or_null("/root/Game/Gunshot")
+		if sound != null:
+			sound.playing = true
 		if target != null and target.is_in_group("target"):
 			target.die()
 	if global_transform.origin.y < -15:

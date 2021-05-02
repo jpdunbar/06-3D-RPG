@@ -5,8 +5,8 @@ onready var Dialogue = get_node("/root/Game/UI/Dialogue")
 var dialogue = [
 	"Hello and welcome to the game. Press E to continue."
 	,"I have knocked down the wall for you."
-	,"Get in there and destory all the targets and drone before time runs out."
-	,"Watch out, for the drone does damage."	
+	,"Get in there and destory all the targets and the drone before time runs out."
+	,"Watch out because the drone does damage."	
 ]
 
 func _ready():
