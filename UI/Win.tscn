@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://UI/Win.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Kenney Future.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/New Hope (1).ogg" type="AudioStream" id=3]
+[ext_resource path="res://Assets/skill-desc_0003_bg.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -25,6 +27,14 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="ColorRect"]
+position = Vector2( 507.408, 296.707 )
+scale = Vector2( 3.78013, 3.75992 )
+texture = ExtResource( 7 )
 
 [node name="Label" type="Label" parent="."]
 anchor_left = 0.5
@@ -32,13 +42,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -100.0
-margin_top = -20.0
+margin_top = -120.0
 margin_right = 100.0
-margin_bottom = 15.0
+margin_bottom = -85.0
 custom_fonts/font = SubResource( 1 )
 text = "You win!"
 align = 1
 valign = 1
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -64,5 +75,9 @@ text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
 [connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
